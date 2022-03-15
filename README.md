@@ -1,3 +1,6 @@
+![](https://streamable.com/wl8j92)
+
+
 NOTE: *This project is usable but is still work in progress.*
 
 Currently, paginated multi select's is probably the most elegant
