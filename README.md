@@ -7,6 +7,8 @@ NOTE: *This project is usable but is still work in progress.*
 Currently, paginated multi select's is probably the most elegant
 solution we have to pagination with Discord bots and that's precisely what this package does.
 
+This package is intended to be used with [nyxx](https://github.com/nyxx-discord/nyxx)
+
 ## Features
 - Paginate any list that contains over 25 items.
 - Also processes list's containing less than 25 items as a single page.
