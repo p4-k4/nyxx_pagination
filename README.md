@@ -1,5 +1,4 @@
-![](https://i.imgur.com/uZmvmVu.mp4)
-
+![](https://i.imgur.com/GEISLbY.gif)
 
 NOTE: *This project is usable but is still work in progress.*
 
