@@ -1,4 +1,4 @@
-# nyxxPagnate
+# Nyxx Paginate
 
 ![](https://i.imgur.com/I9UYpp5.gif)
 
