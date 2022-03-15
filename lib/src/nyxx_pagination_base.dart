@@ -99,11 +99,15 @@ class PaginateMultiSelect {
     return chunks;
   }
 
-  List<PaginatedMultiSelectHandler> handlers() {
+  PaginatedMultiSelectHandler handler() {
+    /// Returns a `PaginatedMultiSelectHandler` to be registered with the bot client.
+    ///
+    /// The handler also contains logic for the Next and Back options
+    /// along with the custom handler.
     List<PaginatedMultiSelectHandler> multiSelectInteractionHandlers = [];
     final pages = _paginateMultiselect();
 
-    Future<void> handler(IMultiselectInteractionEvent event) async {
+    Future<void> _handler(IMultiselectInteractionEvent event) async {
       // If next button is pressed
       if (event.interaction.values.any((element) => element.contains(id)) &&
           event.interaction.values.any((element) => element.contains('next'))) {
@@ -138,23 +142,8 @@ class PaginateMultiSelect {
     }
 
     multiSelectInteractionHandlers
-        .add(PaginatedMultiSelectHandler(id, handler));
+        .add(PaginatedMultiSelectHandler(id, _handler));
 
-    return multiSelectInteractionHandlers;
-  }
-
-  void registerNavigationHandler(INyxxWebsocket? bot) {
-    if (bot != null) {
-      final chunks = handlers();
-      final paginatedNavigationHandlers = [
-        for (var i in chunks) handlers()
-      ];
-      for (var i in paginatedNavigationHandlers) {
-        for (var b in i) {
-          IInteractions.create(WebsocketInteractionBackend(bot))
-              .registerMultiselectHandler(b.id, b.callback);
-        }
-      }
-    }
+    return PaginatedMultiSelectHandler(id, _handler);
   }
 }
