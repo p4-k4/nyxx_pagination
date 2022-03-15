@@ -8,32 +8,32 @@ class PaginatedMultiSelectHandler {
 }
 
 class PaginateMultiSelect {
-/// NOTE: Work in progress!
-/// Creates a paginated multi select's for lists that exceed 25 items.
-/// For any lists containing less than 25 items, will produce 1  multi select on a single page.
+  /// NOTE: Work in progress!
+  /// Creates a paginated multi select's for lists that exceed 25 items.
+  /// For any lists containing less than 25 items, will produce 1  multi select on a single page.
   PaginateMultiSelect({
     required this.id,
     required this.list,
-    required this.bot,
     this.contentPrefix,
     this.customHandler,
   });
+
   /// ID to be used as a string prefix with the multi select handler and labels.
   /// On interaction events, customID's will appear as ID_item, "ID" being the [id]
   /// and "item" being the [list] item converted to `String`.
   final String id;
+
   /// `List` of items that will be converted to `String` values for display in the list.
   final List list;
-  /// The bot client.
-  final INyxxWebsocket bot;
 
   /// Additional content that preceeds the page counter.
   final String? contentPrefix;
+
   /// Any additional event handling.
   ///
   /// Option labels are set in the format of id_item.
   final Future<void> Function(IMultiselectInteractionEvent)? customHandler;
- 
+
   /// Returns a `ComponentMessageBuilder` containing page counter and the multi select component.
   ComponentMessageBuilder build() {
     final multiPages = _paginateMultiselect();
@@ -99,7 +99,7 @@ class PaginateMultiSelect {
     return chunks;
   }
 
-  List<PaginatedMultiSelectHandler> paginateNavigationHandler() {
+  List<PaginatedMultiSelectHandler> handlers() {
     List<PaginatedMultiSelectHandler> multiSelectInteractionHandlers = [];
     final pages = _paginateMultiselect();
 
@@ -143,15 +143,17 @@ class PaginateMultiSelect {
     return multiSelectInteractionHandlers;
   }
 
-  register() {
-    final chunks = paginateNavigationHandler();
-    final paginatedNavigationHandlers = [
-      for (var i in chunks) paginateNavigationHandler()
-    ];
-    for (var i in paginatedNavigationHandlers) {
-      for (var b in i) {
-        IInteractions.create(WebsocketInteractionBackend(bot))
-            .registerMultiselectHandler(b.id, b.callback);
+  void registerNavigationHandler(INyxxWebsocket? bot) {
+    if (bot != null) {
+      final chunks = handlers();
+      final paginatedNavigationHandlers = [
+        for (var i in chunks) handlers()
+      ];
+      for (var i in paginatedNavigationHandlers) {
+        for (var b in i) {
+          IInteractions.create(WebsocketInteractionBackend(bot))
+              .registerMultiselectHandler(b.id, b.callback);
+        }
       }
     }
   }
