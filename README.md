@@ -1,4 +1,6 @@
-![](https://i.imgur.com/GEISLbY.gif)
+# nyxxPagnate
+
+![](https://i.imgur.com/I9UYpp5.gif)
 
 NOTE: *This project is usable but is still work in progress.*
 
