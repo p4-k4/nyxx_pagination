@@ -15,6 +15,7 @@ This package is intended to be used with [nyxx](https://github.com/nyxx-discord/
 - Next and Back options on the top and bottom of list respectively.
 - Page counter to show the current page and total pages.
 - Ability to prepend message content.
+- Ability to add your own option handler.
 - Automatically creates and registers `MultiSelectInteractionHandlers`.
 - Optional Next and Back buttons (planned future).
 
