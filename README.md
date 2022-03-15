@@ -5,7 +5,7 @@
 NOTE: *This project is usable but is still work in progress.*
 
 Currently, paginated multi select's is probably the most elegant
-solution we have in Discord bot Development and that's precisely what this package does.
+solution we have to pagination with Discord bots and that's precisely what this package does.
 
 ## Features
 - Paginate any list that contains over 25 items.
